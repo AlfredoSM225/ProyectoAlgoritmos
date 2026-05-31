@@ -1,4 +1,5 @@
 import java.util.PriorityQueue;
+import java.util.Stack;
 
 public class GrafoDirigidoAciclico {
     private int n;
@@ -42,7 +43,13 @@ public class GrafoDirigidoAciclico {
         return vertices[i].salidas.contains(vertices[j]);
     }
 
-    boolean conectados(int i, int j) {
+    public boolean conectados(int i, int j) {
+        for (Vertice salida : vertices[i].salidas) {
+            if (salida == vertices[j]) { return true; }
+
+            if (conectados(indexDeVertice(salida), j)) { return true; }
+        }
+
         return false;
     }
 
@@ -117,5 +124,15 @@ public class GrafoDirigidoAciclico {
             vertices[i].salidas.clear();
             vertices[i].entradas.clear();
         }
+    }
+
+    public int indexDeVertice(Vertice vertice) {
+        for (int i = 0; i < n; i++) {
+            if (vertice == vertices[i]) {
+                return i;
+            }
+        }
+
+        return -1;
     }
 }
