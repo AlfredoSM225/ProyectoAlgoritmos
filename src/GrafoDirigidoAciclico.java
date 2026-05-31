@@ -43,7 +43,11 @@ public class GrafoDirigidoAciclico {
         return vertices[i].salidas.contains(vertices[j]);
     }
 
-    public boolean conectados(int i, int j) {
+    public boolean conectados(int i, int j) { 
+        if (i < 0 || i >= n || j < 0 || j >= n) {
+            throw new IllegalArgumentException("Error: vertice fuera de rango.");
+        }
+
         for (Vertice salida : vertices[i].salidas) {
             if (salida == vertices[j]) { return true; }
 
@@ -143,6 +147,12 @@ public class GrafoDirigidoAciclico {
     }
 
     boolean insertarArista(int i, int j) {
+        if (i < 0 || i >= n || j < 0 || j >= n) {
+            throw new IllegalArgumentException("Error: vertice fuera de rango.");
+        }
+
+        if (i == j) { return false; }
+
         vertices[i].salidas.add(vertices[j]);
 
         if (tieneCiclos()) {
