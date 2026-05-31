@@ -108,7 +108,7 @@ public class GrafoDirigidoAciclico {
             int indexSalida = indexDeVertice(salida);
 
             if (!visitados[indexSalida]) {
-                if (tieneCiclos(actual, visitados, pila)) { return true; }
+                if (tieneCiclos(indexSalida, visitados, pila)) { return true; }
             } else if (pila.contains(indexSalida)) {
                 return true;
             }
