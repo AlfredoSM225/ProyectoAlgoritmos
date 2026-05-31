@@ -1,10 +1,10 @@
 import java.util.ArrayList;
-import java.util.List;
 
 public class Vertice {
     int id;
     String nombre;
-    List<Vertice> salidas;
+    ArrayList<Vertice> salidas;
+    ArrayList<Vertice> entradas;
     int gradoEntrada;
 
     public Vertice(int id, String nombre) {
@@ -12,6 +12,14 @@ public class Vertice {
         this.nombre = nombre;
         salidas = new ArrayList<>();
         gradoEntrada = 0;
+    }
+
+    public int getGrado() {
+        return entradas.size() + salidas.size();
+    }
+
+    public int getGradoE() {
+        return entradas.size();
     }
 
     public int getGradoS(){
