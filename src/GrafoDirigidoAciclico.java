@@ -87,7 +87,34 @@ public class GrafoDirigidoAciclico {
         return res;
     }
 
-    boolean tieneCiclos() {
+    public boolean tieneCiclos() {
+        boolean[] visitados = new boolean[n];
+        Stack<Integer> pila = new Stack<>();
+
+        for (int i = 0; i < n; i++) {
+            if(!visitados[i]) {
+                if (tieneCiclos(i, visitados, pila)) { return true; }
+            }
+        }
+
+        return false;
+    }
+
+    private boolean tieneCiclos(int actual, boolean[] visitados, Stack<Integer> pila) {
+        visitados[actual] = true;
+        pila.push(actual);
+
+        for (Vertice salida : vertices[actual].salidas) {
+            int indexSalida = indexDeVertice(salida);
+
+            if (!visitados[indexSalida]) {
+                if (tieneCiclos(actual, visitados, pila)) { return true; }
+            } else if (pila.contains(indexSalida)) {
+                return true;
+            }
+        }
+
+        pila.pop();
         return false;
     }
 
