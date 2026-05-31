@@ -143,7 +143,15 @@ public class GrafoDirigidoAciclico {
     }
 
     boolean insertarArista(int i, int j) {
-        return false;
+        vertices[i].salidas.add(vertices[j]);
+
+        if (tieneCiclos()) {
+            vertices[i].salidas.removeLast();
+            return false;
+        }
+
+        vertices[j].entradas.add(vertices[i]);
+        return true;
     }
 
     public void eliminarAristas() {
