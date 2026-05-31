@@ -5,24 +5,23 @@ public class Vertice {
     String nombre;
     ArrayList<Vertice> salidas;
     ArrayList<Vertice> entradas;
-    int gradoEntrada;
 
     public Vertice(int id, String nombre) {
         this.id = id;
         this.nombre = nombre;
         salidas = new ArrayList<>();
-        gradoEntrada = 0;
+        entradas = new ArrayList<>();
     }
 
     public int getGrado() {
         return entradas.size() + salidas.size();
     }
 
-    public int getGradoE() {
+    public int getGradoEntrada() {
         return entradas.size();
     }
 
-    public int getGradoS(){
+    public int getGradoSalida(){
         return salidas.size();
     }
 

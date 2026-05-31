@@ -17,20 +17,20 @@ public class GrafoDirigidoAciclico {
         if (i < 0 || i >= n) {
             throw new IllegalArgumentException("Error: vertice fuera de rango.");
         }
-        return vertices[i].gradoEntrada;
+        return vertices[i].getGradoEntrada();
     }
 
     public int gradoDeSalida(int i) {
         if (i < 0 || i >= n) {
             throw new IllegalArgumentException("Error: vertice fuera de rango.");
         }
-        return vertices[i].getGradoS();
+        return vertices[i].getGradoSalida();
     }
 
     public int cuantasAristasHay() {
         int total = 0;
         for (int i = 0; i < n; i++) {
-            total += vertices[i].getGradoS();
+            total += vertices[i].getGradoSalida();
         }
         return total;
     }
@@ -51,7 +51,7 @@ public class GrafoDirigidoAciclico {
         PriorityQueue<Integer> cola = new PriorityQueue<>();
 
         for (int i = 0; i < n; i++) {
-            copiaGrados[i] = vertices[i].gradoEntrada;
+            copiaGrados[i] = vertices[i].getGradoEntrada();
 
             if (copiaGrados[i] == 0) {
                 cola.add(i);
@@ -115,7 +115,7 @@ public class GrafoDirigidoAciclico {
     public void eliminarAristas() {
         for (int i = 0; i < n; i++) {
             vertices[i].salidas.clear();
-            vertices[i].gradoEntrada = 0;
+            vertices[i].entradas.clear();
         }
     }
 }
