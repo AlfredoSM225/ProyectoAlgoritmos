@@ -60,10 +60,21 @@ public class GrafoDirigidoAciclico {
 
     public String topologicalSort() {
         int[] copiaGrados = new int[n];
-        PriorityQueue<Integer> cola = new PriorityQueue<>();
+        int[] gradosOriginales = new int[n];
+
+        PriorityQueue<Integer> cola = new PriorityQueue<>((a, b) -> {
+            int gradoA = gradosOriginales[a];
+            int gradoB = gradosOriginales[b];
+
+            if (gradoA != gradoB) {
+                return Integer.compare(gradoA, gradoB);
+            }
+            return Integer.compare(a, b);
+        });
 
         for (int i = 0; i < n; i++) {
-            copiaGrados[i] = vertices[i].getGradoEntrada();
+            gradosOriginales[i] = vertices[i].getGradoEntrada();
+            copiaGrados[i] = gradosOriginales[i];
 
             if (copiaGrados[i] == 0) {
                 cola.add(i);
