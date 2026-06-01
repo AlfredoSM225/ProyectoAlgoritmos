@@ -2,9 +2,10 @@ import java.util.Scanner;
 
 public class Controlador {
     private GrafoDirigidoAciclico grafo;
+    private Scanner scanner;
 
     public Controlador() {
-
+        scanner = new Scanner(System.in);
     }
 
     public void validarOpcion(String opcionTexto) {
@@ -13,16 +14,20 @@ public class Controlador {
         switch (opcion) {
             case 1 -> agregarNuevoGrafo();
             case 2 -> agregarNuevaArista();
-            case 3 -> eliminarAristas();
-            case 4 -> topologicalSort();
-            case 5 -> mostrarEstructura();
+            case 3 -> adyacenciaEntreNodos();
+            case 4 -> conectados();
+            case 5 -> eliminarAristas();
+            case 6 -> gradoDeSalida();
+            case 7 -> gradoDeEntrada();
+            case 6 -> topologicalSort();
+            case 7 -> mostrarEstructura();
         }
     }
 
     public boolean agregarNuevoGrafo() {
         Scanner input = new Scanner(System.in);
         String tamañoTexto = input.next();
-        
+
         int tamaño = validarEntradaNumerica(tamañoTexto);
         if (tamaño <= 0) { return false; }
 
@@ -31,19 +36,152 @@ public class Controlador {
     }
 
     public void agregarNuevaArista() {
+        if (grafo == null) {
+            System.out.println("Grafo no existente");
+            return;
+        }
 
+        String indiceTexto = scanner.next("Indice de Nodo Inicial: ");
+        int indice1 = validarEntradaNumerica(indiceTexto);
+
+        if (indice1 < 0 || indice1 >= grafo.getTamaño()) {
+            System.out.println("Indice fuera de rango");
+            return;
+        }
+
+        indiceTexto = scanner.next("Indice de Nodo Destino: ");
+        int indice2 = validarEntradaNumerica(indiceTexto);
+
+        if (indice2 < 0 || indice2 >= grafo.getTamaño()) {
+            System.out.println("Indice fuera de rango");
+            return;
+        }
+
+        if (grafo.insertarArista(indice1, indice2)) {
+            System.out.println("Arista insertada con exito");
+        } else {
+            System.out.println("No se pudo insertar la nueva arista");
+        }
     }
 
     public void eliminarAristas() {
+        if (grafo == null) {
+            System.out.println("Grafo no existente");
+            return;
+        }
+
+        grafo.eliminarAristas();
+    }
+
+    public void adyacenciaEntreNodos() {
+        if (grafo == null) {
+            System.out.println("Grafo no existente");
+            return;
+        }
+
+        String indiceTexto = scanner.next("Ingrese indice de un nodo: ");
+        int indice1 = validarEntradaNumerica(indiceTexto);
+
+        if (indice1 < 0 || indice1 >= grafo.getTamaño()) {
+            System.out.println("Indice fuera de rango");
+            return;
+        }
+
+        indiceTexto = scanner.next("Ingrese indice de otro nodo: ");
+        int indice2 = validarEntradaNumerica(indiceTexto);
+
+        if (indice2 < 0 || indice2 >= grafo.getTamaño()) {
+            System.out.println("Indice fuera de rango");
+            return;
+        }
+
+        if (grafo.adyacente(indice1, indice2)) {
+            System.out.println("Vertices " + "[" + indice1 + "," + indice2 + "] son adyacentes");
+        } else {
+            System.out.println("Vertices no adyacentes");
+        }
+    }
+
+    public void conectados() {
+        if (grafo == null) {
+            System.out.println("Grafo no existente");
+            return;
+        }
+
+        String indiceTexto = scanner.next("Indice de Nodo Inicial: ");
+        int indice1 = validarEntradaNumerica(indiceTexto);
+
+        if (indice1 < 0 || indice1 >= grafo.getTamaño()) {
+            System.out.println("Indice fuera de rango");
+            return;
+        }
+
+        indiceTexto = scanner.next("Indice Nodo Destino: ");
+        int indice2 = validarEntradaNumerica(indiceTexto);
+
+        if (indice2 < 0 || indice2 >= grafo.getTamaño()) {
+            System.out.println("Indice fuera de rango");
+            return;
+        }
+
+        if (grafo.conectados(indice1, indice2)) {
+            System.out.println("Existe camino entre Vertices " + "[" + indice1 + "," + indice2 + "]");
+        } else {
+            System.out.println("No existe camino entre los vertices");   
+        }
+    }
+
+    public void gradoDeSalida() {
+        if (grafo == null) {
+            System.out.println("Grafo no existente");
+            return;
+        }
+
+        String indiceTexto = scanner.next("Indice de Nodo: ");
+        int indice = validarEntradaNumerica(indiceTexto);
+
+        if (indice < 0 || indice >= grafo.getTamaño()) {
+            System.out.println("Indice fuera de rango");
+            return;
+        }
+
+        System.out.println("Grado de salida de nodo " + indiceTexto + ": " + grafo.gradoDeSalida(indice));
+    }
+
+    public void gradoDeEntrada() {
+        if (grafo == null) {
+            System.out.println("Grafo no existente");
+            return;
+        }
+
+        String indiceTexto = scanner.next("Indice de Nodo: ");
+        int indice = validarEntradaNumerica(indiceTexto);
+
+        if (indice < 0 || indice >= grafo.getTamaño()) {
+            System.out.println("Indice fuera de rango");
+            return;
+        }
+
+        System.out.println("Grado de entrada de nodo " + indiceTexto + ": " + grafo.gradoDeEntrada(indice));
 
     }
 
     public void topologicalSort() {
+        if (grafo == null) {
+            System.out.println("Grafo no existente");
+            return;
+        }
 
+        System.out.println(grafo.topologicalSort());
     }
 
     public void mostrarEstructura() {
-
+        if (grafo == null) {
+            System.out.println("Grafo no existente");
+            return;
+        }
+        
+        System.out.println(grafo.mostrarEstructura());
     }
 
     public static int validarEntradaNumerica(String opcionTexto) {
@@ -60,6 +198,4 @@ public class Controlador {
         System.out.println("(5) Mostrar estructura");
         System.out.println("(6) Salir");
     }
-
-
 }
