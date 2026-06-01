@@ -3,12 +3,20 @@ import java.util.Scanner;
 public class Controlador {
     private GrafoDirigidoAciclico grafo;
     private Scanner scanner;
+    private int bandera = 0;
 
     public Controlador() {
         scanner = new Scanner(System.in);
+
+        while (bandera == 0) {
+            imprimirMenu();
+
+            String opcionTexto = scanner.next();
+            validarOpcion(opcionTexto);
+        }
     }
 
-    public void validarOpcion(String opcionTexto) {
+    public int validarOpcion(String opcionTexto) {
         int opcion = validarEntradaNumerica(opcionTexto);
 
         switch (opcion) {
@@ -19,9 +27,16 @@ public class Controlador {
             case 5 -> eliminarAristas();
             case 6 -> gradoDeSalida();
             case 7 -> gradoDeEntrada();
-            case 6 -> topologicalSort();
-            case 7 -> mostrarEstructura();
+            case 8 -> topologicalSort();
+            case 9 -> mostrarEstructura();
+            case 0 -> bandera = 1;
+            default ->  {
+                System.out.println("Opcion no existente");
+                break;
+            }
         }
+
+        return opcion;
     }
 
     public boolean agregarNuevoGrafo() {
@@ -193,9 +208,13 @@ public class Controlador {
     public void imprimirMenu() {
         System.out.println("(1) Agregar nuevo grafo");
         System.out.println("(2) Agregar nueva arista");
-        System.out.println("(3) Eliminar Aristas");
-        System.out.println("(4) Topological sort");
-        System.out.println("(5) Mostrar estructura");
-        System.out.println("(6) Salir");
+        System.out.println("(3) Adyacencia");
+        System.out.println("(4) Conectados");
+        System.out.println("(5) Eliminar Aristas");
+        System.out.println("(6) Grado de salida de vertice");
+        System.out.println("(7) Grado de entrada de vertice");
+        System.out.println("(8) Topological sort");
+        System.out.println("(9) Mostrar estructura");
+        System.out.println("(0) Salir");
     }
 }
