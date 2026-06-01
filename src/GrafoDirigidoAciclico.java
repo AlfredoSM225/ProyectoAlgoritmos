@@ -180,4 +180,8 @@ public class GrafoDirigidoAciclico {
 
         return -1;
     }
+
+    public int getTamaño() {
+        return n;
+    }
 }
