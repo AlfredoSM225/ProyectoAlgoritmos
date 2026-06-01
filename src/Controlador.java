@@ -40,8 +40,8 @@ public class Controlador {
     }
 
     public boolean agregarNuevoGrafo() {
-        Scanner input = new Scanner(System.in);
-        String tamañoTexto = input.next();
+        System.out.print("Ingrese el tamaño del nuevo grafo: ");
+        String tamañoTexto = scanner.next();
 
         int tamaño = validarEntradaNumerica(tamañoTexto);
         if (tamaño <= 0) { return false; }
@@ -56,7 +56,8 @@ public class Controlador {
             return;
         }
 
-        String indiceTexto = scanner.next("Indice de Nodo Inicial: ");
+        System.out.print("Indice del Nodo Inicial: ");
+        String indiceTexto = scanner.next();
         int indice1 = validarEntradaNumerica(indiceTexto);
 
         if (indice1 < 0 || indice1 >= grafo.getTamaño()) {
@@ -64,7 +65,8 @@ public class Controlador {
             return;
         }
 
-        indiceTexto = scanner.next("Indice de Nodo Destino: ");
+        System.out.print("Indice de Nodo Destino: ");
+        indiceTexto = scanner.next();
         int indice2 = validarEntradaNumerica(indiceTexto);
 
         if (indice2 < 0 || indice2 >= grafo.getTamaño()) {
@@ -94,7 +96,8 @@ public class Controlador {
             return;
         }
 
-        String indiceTexto = scanner.next("Ingrese indice de un nodo: ");
+        System.out.print("Ingrese indice de un nodo: ");
+        String indiceTexto = scanner.next();
         int indice1 = validarEntradaNumerica(indiceTexto);
 
         if (indice1 < 0 || indice1 >= grafo.getTamaño()) {
@@ -102,7 +105,8 @@ public class Controlador {
             return;
         }
 
-        indiceTexto = scanner.next("Ingrese indice de otro nodo: ");
+        System.out.print("Ingrese el indice de otro nodo: ");
+        indiceTexto = scanner.next();
         int indice2 = validarEntradaNumerica(indiceTexto);
 
         if (indice2 < 0 || indice2 >= grafo.getTamaño()) {
@@ -123,7 +127,8 @@ public class Controlador {
             return;
         }
 
-        String indiceTexto = scanner.next("Indice de Nodo Inicial: ");
+        System.out.print("Indice de Nodo Inicial: ");
+        String indiceTexto = scanner.next();
         int indice1 = validarEntradaNumerica(indiceTexto);
 
         if (indice1 < 0 || indice1 >= grafo.getTamaño()) {
@@ -131,7 +136,8 @@ public class Controlador {
             return;
         }
 
-        indiceTexto = scanner.next("Indice Nodo Destino: ");
+        System.out.print("Indice de Nodo Destino: ");
+        indiceTexto = scanner.next();
         int indice2 = validarEntradaNumerica(indiceTexto);
 
         if (indice2 < 0 || indice2 >= grafo.getTamaño()) {
@@ -152,7 +158,8 @@ public class Controlador {
             return;
         }
 
-        String indiceTexto = scanner.next("Indice de Nodo: ");
+        System.out.print("Indice de Nodo: ");
+        String indiceTexto = scanner.next();
         int indice = validarEntradaNumerica(indiceTexto);
 
         if (indice < 0 || indice >= grafo.getTamaño()) {
@@ -169,7 +176,8 @@ public class Controlador {
             return;
         }
 
-        String indiceTexto = scanner.next("Indice de Nodo: ");
+        System.out.print("Indice de Nodo: ");
+        String indiceTexto = scanner.next();
         int indice = validarEntradaNumerica(indiceTexto);
 
         if (indice < 0 || indice >= grafo.getTamaño()) {
