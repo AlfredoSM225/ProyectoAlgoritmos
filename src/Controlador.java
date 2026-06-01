@@ -9,7 +9,9 @@ public class Controlador {
         scanner = new Scanner(System.in);
 
         while (bandera == 0) {
+            System.out.println();
             imprimirMenu();
+            System.out.println();
 
             String opcionTexto = scanner.next();
             validarOpcion(opcionTexto);
@@ -56,7 +58,7 @@ public class Controlador {
             return;
         }
 
-        System.out.print("Indice del Nodo Inicial: ");
+        System.out.print("Indice o Nombre del Nodo Inicial: ");
         String indiceTexto = scanner.next();
         int indice1 = validarEntradaNumerica(indiceTexto);
 
@@ -65,7 +67,7 @@ public class Controlador {
             return;
         }
 
-        System.out.print("Indice de Nodo Destino: ");
+        System.out.print("Indice o Nombre de Nodo Destino: ");
         indiceTexto = scanner.next();
         int indice2 = validarEntradaNumerica(indiceTexto);
 
@@ -96,7 +98,7 @@ public class Controlador {
             return;
         }
 
-        System.out.print("Ingrese indice de un nodo: ");
+        System.out.print("Ingrese o nombre indice de un nodo: ");
         String indiceTexto = scanner.next();
         int indice1 = validarEntradaNumerica(indiceTexto);
 
@@ -105,7 +107,7 @@ public class Controlador {
             return;
         }
 
-        System.out.print("Ingrese el indice de otro nodo: ");
+        System.out.print("Ingrese el indice o nombre de otro nodo: ");
         indiceTexto = scanner.next();
         int indice2 = validarEntradaNumerica(indiceTexto);
 
@@ -127,7 +129,7 @@ public class Controlador {
             return;
         }
 
-        System.out.print("Indice de Nodo Inicial: ");
+        System.out.print("Indice o Nombre de Nodo Inicial: ");
         String indiceTexto = scanner.next();
         int indice1 = validarEntradaNumerica(indiceTexto);
 
@@ -136,7 +138,7 @@ public class Controlador {
             return;
         }
 
-        System.out.print("Indice de Nodo Destino: ");
+        System.out.print("Indice o Nombre de Nodo Destino: ");
         indiceTexto = scanner.next();
         int indice2 = validarEntradaNumerica(indiceTexto);
 
@@ -158,7 +160,7 @@ public class Controlador {
             return;
         }
 
-        System.out.print("Indice de Nodo: ");
+        System.out.print("Indice o Nombre de Nodo: ");
         String indiceTexto = scanner.next();
         int indice = validarEntradaNumerica(indiceTexto);
 
@@ -176,7 +178,7 @@ public class Controlador {
             return;
         }
 
-        System.out.print("Indice de Nodo: ");
+        System.out.print("Indice o Nombre de Nodo: ");
         String indiceTexto = scanner.next();
         int indice = validarEntradaNumerica(indiceTexto);
 
@@ -207,10 +209,18 @@ public class Controlador {
         System.out.println(grafo.mostrarEstructura());
     }
 
-    public static int validarEntradaNumerica(String opcionTexto) {
-        if (opcionTexto.matches(".*\\D.*")) { return -1; }
+    public int validarEntradaNumerica(String opcionTexto) {
+        if (opcionTexto.matches(".*\\D.*")) { return validarIndiceDeLetra(opcionTexto); }
 
         return Integer.parseInt(opcionTexto);
+    }
+
+    public int validarIndiceDeLetra(String opcionTexto) {
+        if (opcionTexto.length() > 1) { return -1; }
+
+        if (opcionTexto.toCharArray()[0] < 65 || opcionTexto.toCharArray()[0] > 90) { return -1; }
+
+        return opcionTexto.toCharArray()[0] - 65;
     }
 
     public void imprimirMenu() {

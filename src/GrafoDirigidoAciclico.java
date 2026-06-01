@@ -10,7 +10,8 @@ public class GrafoDirigidoAciclico {
         vertices = new Vertice[n];
 
         for (int i = 0; i < n; i++) {
-            vertices[i] = new Vertice(i, String.valueOf(i));
+            char letra = (char)(i + 65);
+            vertices[i] = new Vertice(i, "" + letra);
         }
     }
 
@@ -77,7 +78,7 @@ public class GrafoDirigidoAciclico {
             if (!res.isEmpty()) {
                 res += "-";
             }
-            res += vertices[actual].nombre;
+            res += (char)(actual + 65);
 
             for (Vertice v : vertices[actual].salidas) {
                 copiaGrados[v.id] = copiaGrados[v.id] - 1;
@@ -126,12 +127,16 @@ public class GrafoDirigidoAciclico {
         String texto = "  ";
 
         for (int j = 0; j < n; j++) {
-            texto = texto + j + " ";
+            char letra = 65;
+            letra += j;
+            texto = texto + letra + " ";
         }
         texto = texto + "\n";
 
         for (int i = 0; i < n; i++) {
-            texto = texto + i + " ";
+            char letra = 65;
+            letra += i;
+            texto = texto + letra + " ";
 
             for (int j = 0; j < n; j++) {
                 if (vertices[i].salidas.contains(vertices[j])) {
